@@ -1,0 +1,11 @@
+FDDB-folds/
+images/
+weights/
+zip/
+
+fddb.data
+fddb.paths
+fddb.names
+README.txt
+
+\#*
