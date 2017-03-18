@@ -1,6 +1,3 @@
-import os
-import errno
-
 import math
 from PIL import Image
 
