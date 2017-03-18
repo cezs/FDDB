@@ -1,3 +1,5 @@
+import os
+import errno
 import math
 from PIL import Image
 
@@ -10,14 +12,35 @@ fddb_absolute_paths = '/media/win/_/FDDB/fddb.paths'
 fddb_classes_file = '/media/win/_/FDDB/fddb.names'
 fddb_config_file = '/media/win/_/FDDB/fddb.data'
 
+# with open(fddb_paths, 'r') as paths:
+#     for line in paths:
+#         newline = line.rsplit('/')
+#         print '/'.join(newline[0:len(newline)-1])
+
+
 ###############################
 # individual annotation files #
 ###############################
 
+def make_sure_path_exists(path):
+    try:
+        os.makedirs(path)
+    except OSError as exception:
+        if exception.errno != errno.EEXIST:
+            raise
+    finally:
+        return path
+        
 with open(fddb_annotations, 'r') as annotations:
     for filepath in annotations:
-        filepath_clean = '/media/win/_/FDDB/images/'+filepath.rstrip('\n')
+        # make labels/<year>/<month>/<day>/big directory tree
+        filepath_split = filepath.rsplit('/')
+        filepath_dir = make_sure_path_exists('/media/win/_/FDDB/labels/' + '/'.join(filepath_split[0:len(filepath_split)-1]))
+        # image annotation filepath
+        filepath_clean = '/media/win/_/FDDB/labels/'+filepath.rstrip('\n')
+        # make annotation
         with open(filepath_clean + '.txt', 'w+') as annotation:
+            # for each ellipse in image file
             for bbox in range(int(next(annotations))):
                 # supplied values
                 current_line = next(annotations)
@@ -30,7 +53,7 @@ with open(fddb_annotations, 'r') as annotations:
                 # find image dimensions
                 img_width = 0
                 img_height = 0
-                with Image.open(filepath_clean + '.jpg') as img:
+                with Image.open(filepath_clean.replace('labels','images') + '.jpg') as img:
                     img_width, img_height = img.size
                 # calculate bounding box of rotated ellipse
                 calc_x = math.sqrt(major_axis_radius**2 * math.cos(angle)**2 \
