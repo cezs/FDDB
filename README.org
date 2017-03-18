@@ -1,0 +1,20 @@
+* Download
+
+wget http://vis-www.cs.umass.edu/fddb/FDDB-folds.tgz
+wget http://vis-www.cs.umass.edu/fddb/README.txt
+wget http://tamaraberg.com/faceDataset/originalPics.tar.gz
+
+* Unpack
+
+mdkir images
+tar -xzvf originalPics.tar.gz images
+
+* Dependencies
+
+pip install Pillow
+
+* Prepare
+
+./scripts/cs_fddb_prepare_FDDB-folds.sh
+python ./scripts/cs_fddb_convert_to_darknet.py
+
