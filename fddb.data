@@ -1,0 +1,5 @@
+classess = 2
+train = /media/win/_/FDDB/fddb.paths
+valid = /media/win/_/FDDB/fddb.paths
+names = /media/win/_/FDDB/fddb.names
+backup = backup
