@@ -1,3 +1,5 @@
+#+title: FDDB
+
 * Download
 
 #+begin_src sh
@@ -26,3 +28,6 @@ pip install Pillow
 python ./scripts/cs_fddb_convert_to_darknet.py
 #+end_src
 
+* License
+
+This is free and unencumbered software released into the public domain. For more information, please refer to the [[./LICENSE][LICENSE]] file.
