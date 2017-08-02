@@ -1,7 +1,10 @@
 #+title: FDDB
 
+This repository contains scripts automating conversion of the FDDB dataset to a format required by the Darknet framework.
+
 * Download
 
+Use the following links in order to download the complete FDDB dataset.
 #+begin_src sh
 wget http://vis-www.cs.umass.edu/fddb/FDDB-folds.tgz
 wget http://vis-www.cs.umass.edu/fddb/README.txt
@@ -10,6 +13,7 @@ wget http://tamaraberg.com/faceDataset/originalPics.tar.gz
 
 * Unpack
 
+Create a new folder named =images= and unpack the supplied images inside of it. 
 #+begin_src sh
 mdkir images
 tar -xzvf originalPics.tar.gz images
@@ -17,12 +21,14 @@ tar -xzvf originalPics.tar.gz images
 
 * Dependencies
 
+Install the required Python libraries. 
 #+begin_src sh
 pip install Pillow
 #+end_src
 
 * Prepare
 
+Generate all the files required by the Darknet.
 #+begin_src sh
 ./scripts/cs_fddb_prepare_FDDB-folds.sh
 python ./scripts/cs_fddb_convert_to_darknet.py
