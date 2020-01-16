@@ -3,14 +3,16 @@ import errno
 import math
 from PIL import Image
 
+topdir = os.path.abspath(__file__+"/../../")
+
 # in
-fddb_annotations = '/media/win/_/FDDB/FDDB-folds/FDDB-annotations.txt'
-fddb_paths = '/media/win/_/FDDB/FDDB-folds/FDDB-paths.txt'
+fddb_annotations = topdir+'/FDDB-folds/FDDB-annotations.txt'
+fddb_paths = topdir+'/FDDB-folds/FDDB-paths.txt'
 
 # out
-fddb_absolute_paths = '/media/win/_/FDDB/fddb.paths'
-fddb_classes_file = '/media/win/_/FDDB/fddb.names'
-fddb_config_file = '/media/win/_/FDDB/fddb.data'
+fddb_absolute_paths = topdir+'/fddb.paths'
+fddb_classes_file = topdir+'/fddb.names'
+fddb_config_file = topdir+'/fddb.data'
 
 # with open(fddb_paths, 'r') as paths:
 #     for line in paths:
@@ -35,9 +37,9 @@ with open(fddb_annotations, 'r') as annotations:
     for filepath in annotations:
         # make labels/<year>/<month>/<day>/big directory tree
         filepath_split = filepath.rsplit('/')
-        filepath_dir = make_sure_path_exists('/media/win/_/FDDB/labels/' + '/'.join(filepath_split[0:len(filepath_split)-1]))
+        filepath_dir = make_sure_path_exists(topdir + '/labels/' + '/'.join(filepath_split[0:len(filepath_split)-1]))
         # image annotation filepath
-        filepath_clean = '/media/win/_/FDDB/labels/'+filepath.rstrip('\n')
+        filepath_clean = topdir+'/labels/'+filepath.rstrip('\n')
         # make annotation
         with open(filepath_clean + '.txt', 'w+') as annotation:
             # for each ellipse in image file
@@ -79,7 +81,7 @@ with open(fddb_annotations, 'r') as annotations:
 with open(fddb_paths, 'r') as paths:
     with open(fddb_absolute_paths, 'w') as absolute_paths:
         for filepath in paths:
-            absolute_paths.write('/media/win/_/FDDB/images/'+filepath.rstrip('\n')+'.jpg\n')
+            absolute_paths.write(topdir+'/images/'+filepath.rstrip('\n')+'.jpg\n')
 
 ################
 # classes file #
