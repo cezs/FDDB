@@ -14,12 +14,6 @@ fddb_absolute_paths = topdir+'/fddb.paths'
 fddb_classes_file = topdir+'/fddb.names'
 fddb_config_file = topdir+'/fddb.data'
 
-# with open(fddb_paths, 'r') as paths:
-#     for line in paths:
-#         newline = line.rsplit('/')
-#         print '/'.join(newline[0:len(newline)-1])
-
-
 ###############################
 # individual annotation files #
 ###############################
